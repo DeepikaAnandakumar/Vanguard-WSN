@@ -1,0 +1,19 @@
+﻿
+--- Running for 50 Nodes ---
+Calculating LP Upper Bound (God Line)...
+  Avg LP Bound: 3292.5 rounds
+  Simulating HEED_Clustered...
+    Seed 0 finished with FND: 1022
+    FND: 999.4 (30.4% of Optimal)
+  Simulating PEGASIS...
+    Seed 0 finished with FND: 2304
+    FND: 2092.6 (63.6% of Optimal)
+  Simulating EBPT_Flat_Gamma_0.5...
+    Seed 0 finished with FND: 2903
+    FND: 2782.6 (84.5% of Optimal)
+  Simulating EBPT_Clustered_Gamma_0.5...
+    Seed 0 finished with FND: 1016
+    FND: 1008.2 (30.6% of Optimal)
+  Simulating LEACH_EnergyAware...
+    Seed 0 finished with FND: 1025
+    FND: 1005.4 (30.5% of Optimal)

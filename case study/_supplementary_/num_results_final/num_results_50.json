@@ -1,0 +1,29 @@
+{
+  "lp_bound_mean": 3338.9851146606525,
+  "lp_bound_std": 91.78495857761342,
+  "HEED_Clustered": {
+    "fnd_mean": 971.7,
+    "fnd_std": 132.0286585051392,
+    "optimality_gap": 29.10165713927586
+  },
+  "PEGASIS": {
+    "fnd_mean": 1843.2,
+    "fnd_std": 223.8594797337532,
+    "optimality_gap": 55.20240242782059
+  },
+  "EBPT_Flat_Gamma_0.5": {
+    "fnd_mean": 2701.5,
+    "fnd_std": 157.0620896333676,
+    "optimality_gap": 80.90781801147857
+  },
+  "EBPT_Clustered_Gamma_0.5": {
+    "fnd_mean": 998.4,
+    "fnd_std": 38.7103201858224,
+    "optimality_gap": 29.901301315069485
+  },
+  "LEACH_EnergyAware": {
+    "fnd_mean": 958.4,
+    "fnd_std": 34.121352063871484,
+    "optimality_gap": 28.703332512382406
+  }
+}

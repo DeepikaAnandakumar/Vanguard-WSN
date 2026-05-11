@@ -1,0 +1,428 @@
+Vanguard-WSN: A Utility-Driven Energy-Balanced Path Tree Framework for Maximizing Wireless Sensor Network Lifetime
+
+1st Deepika A, 2st Aishvarya G, 3st Anjana A , 4st Gayatri K , 5st K. Karthika *
+
+Department of Mathematics, Amrita School of Physical Sciences, Coimbatore, Amrita Vishwa Vidyapeetham, India.
+
+cb.ps.i5das23026@cb.students.amrita.edu, cb.ps.i5das23046@cb.students.amrita.edu,
+cb.ps.i5das23055@cb.students.amrita.edu cb.ps.i5das23049@cb.students.amrita.edu,k_karthika@cb.amrita.edu
+
+
+
+
+Abstract— In modern Internet of Things (IoT) systems, Wireless Sensor Networks (WSNs) plays a critical role, but their lifetime is often limited by the Energy Hole problem. Nodes located near the Base Station (BS) handle most of the data forwarding and therefore drain their energy quickly, which can cause the network to break apart. Old routing protocols such as LEACH, HEED, and PEGASIS try to reduce this issue using random rotation or chain-based structures. However, these methods achieve only about 10–15% of the network’s theoretical maximum lifetime. Vanguard-WSN, proposed framework replaces random decision-making with a utility-based deterministic approach. The framework includes two key innovations namely a Composite Utility Index (Ui) to select Cluster Heads based on remaining energy and network position, and an Energy-Balanced Path Tree (EBPT) with an adaptive load-balancing factor to prevent energy hotspots. Simulation results from 30 trials on a 100node network show that Vanguard-WSN is better than older systems. The First Node Death (FND) occurs at round 993.1, compared to LEACH (FND = 97.3). Vanguard achieves 92% of the theoretical lifetime bound (), maintains a Packet Success Ratio of 98.4%, and operates within time complexity, making it suitable for low-power microcontrollers. These results show that Vanguard-WSN provides a highly efficient and practical solution for mission-critical WSN applications.
+
+
+Keywords— Energy-Balanced Path Tree, Energy Efficiency, Network Lifetime Optimization, IoT, Wireless Sensor Networks, Cluster Head Selection
+
+Introduction 
+
+Over the last two decades, wireless networks have changed a lot from concentrated and complex models to flexible, independent networking environments by the idea of Mobile Ad-hoc Network. A Mobile Ad Hoc Network (MANET) is an autonomous network made up of devices that connect to each other wirelessly without any fixed network setup. What makes a MANET unique is its constantly changing nature. Each device is not just sending or receiving data; it also helps forward data for other devices, keeping the whole network connected. Because there is no need for any fixed network setup, MANETs can be quickly set up in emergencies or temporary situations. However, this flexibility also creates challenges. Managing resources in a MANET is difficult. Unlike wired networks, where power supply and bandwidth are stable, MANET devices run on limited battery power and depends on wireless links that are not always stable. As the need for continuous and widespread connectivity increases, researchers have focused more on a specific type of ad hoc network called the Wireless Sensor Network (WSN), which is designed for sensing and monitoring tasks under similar constraints. Wireless Sensor Networks (WSNs) is an advanced form of MANET technology. While MANET nodes are associated with devices which are carried by humans such as smartphones, laptops, radio sets, etc., WSN nodes are associated with hundreds or thousands of tiny, low-power devices placed in the environment. These nodes can do sensing, process data, and communicate with each other. They are used to observe substantial or ecological circumstances such as pressure, temperature, motion, or sound. Wireless sensor networks have been extensively studied in the literature [1], [2], with numerous clustering and routing strategies proposed to enhance energy efficiency [3], [4]. WSNs have become fundamental to a wide range of critical applications, such as Precision Agriculture, Structural Health Monitoring (SHM), Battlefield Surveillance, and Industrial IoT (IIoT). In all these scenarios, the most important factor is the "lifetime" or how long the network can work. Network’s lifetime means the time until an area of the network is no longer properly monitored because a sensor stops working, or the first “coverage gap” appears is the most critical performance metric. Since batteries are non-replaceable, the death of a node is permanent.Clustering-based routing protocols such as LEACH [5] attempt to extend network lifetime by randomly rotating leadership roles. However, these protocols often do not consider how nodes are physically distributed in the network. Therefore, low remaining energy nodes may be set as leader nodes, which can speed up the failure of the network. HEED [7] improves cluster head selection by incorporating residual energy awareness, yet it introduces iterative overhead during cluster formation. PEGASIS [8] adopts a chain-based structure to reduce transmission energy, but it increases delay and suffers from structural fragility. These limitations highlight the gap between practical routing performance and the theoretical maximum achievable lifetime. To address this gap, this work introduces Vanguard-WSN, a framework that combines self-managing networking with mathematically optimal energy control. The core idea is the Energy-Balanced Path Tree (EBPT), which adjusts routing paths based on an adaptive cost function to prevent hotspot formation and uneven energy depletion.
+
+
+
+Fig 1: Vanguard-WSN Architecture
+
+The research significance lies in benchmarking performance against the theoretical God-Line (LP-Bound). Simulation results demonstrate that Vanguard-WSN extends network stability, measured by First Node Death (FND), by over 1,000% compared to legacy methods. This improvement is achieved through structural energy balancing rather than hardware modification, establishing a scalable and sustainable routing framework for IoT-based Wireless Sensor Networks.
+
+	MAIN CONTRIBUTION: THE VANGUARD FRAMEWORK
+
+The main motive for developing Vanguard-WSN is the large gap between how existing routing protocols perform in practice and the maximum possible lifetime of Wireless Sensor Network (WSN). Throughout the research, this theoretical maximum is called the "God-Line". It represents the longest possible network lifetime that could be achieved if a controller had complete knowledge of every packet transmission and could perfectly distribute the energy load among all nodes.The initial analysis showed that older protocols like LEACH [5] and HEED [7] often perform at only 10–15% of the network’s theoretical maximum. This large "performance gap" is because they make decisions based only on the local information. These protocols optimize for the next round (greedy approach) or the nearest neighbours, whereas the God-Line assumes a complete, long-term optimization across the entire network. Vanguard-WSN is designed to close this gap by better energy balancing across all nodes, and it helps the network last much longer.
+
+
+
+Energy-Balanced Path Tree (EBPT) Architecture.
+
+
+Unlike fixed routing methods that always choose the shortest path and end up quickly using up the energy of the same nodes near the base station, EBPT takes a smarter approach. It prefers nodes that still have plenty of energy and are not handling too much traffic. As these relay nodes begin to lose power, the routing paths automatically change and shift traffic to nodes with more remaining energy. This helps prevent repeated heavy use of nodes near the base station.
+
+
+
+
+[Figure 2: EBPT Routing Tree]
+
+2.2 Comprehensive System Model
+
+To make the simulation results easy to reproduce and clearly understandable, the network, radio, and traffic models are used in this study.
+
+Network Topology Assumptions
+
+Assuming a network of N sensor nodes (usually N = 100) that are randomly placed in a square sensing area of size M×M. The Base Station (BS) is located at the center of this area
+
+The following assumptions are used:
+
+Stationary Nodes: After deployment, both the sensor nodes and the Base Station remain in fixed positions.
+
+Identical Nodes: All sensor nodes start with the same initial energy level
+
+Location Awareness: Each node knows its own position and the position of the Base Station, using GPS or signal-based methods.
+
+Symmetric Communication: The energy needed to send data between two nodes is the same in both directions.
+
+Radio Energy Dissipation Model
+
+Vanguard-WSN follows the commonly used First-Order Radio Energy Model to estimate communication energy costs. The energy required to transmit a -bit packet over distance is given by:
+
+                  (1)
+
+
+
+: Energy dissipated per bit to operate transmitter/receiver circuitry
+(typically )
+
+
+
+: Free-space amplifier energy
+()
+
+
+
+: Multipath fading amplifier energy
+()
+
+
+
+: Crossover transmission distance
+
+
+
+                                  (2)
+
+Substituting standard values:
+
+         (3)
+
+(≈ 87 m when rounded)
+
+
+Energy for Reception
+To receive a -bit packet:
+
+                                                                                 (4)
+
+This sharp increase in energy cost for long distance transmission is important (). Vanguard's EBPT avoids long-range transmissions that cross the threshold unless necessary, prioritizing multi-hop paths composed of short, low energy links.
+
+Data Aggregation Model
+
+Hierarchical routing becomes inefficient if data is not combined before forwarding. In Vanguard, Cluster Heads (CHs) perform data fusion. When a CH receives packets from its child nodes, it combines them into one single packet of fixed size k.The energy used for this process depends on EDA, which represents the energy required per bit for data aggregation (5 nJ/bit). This linear model shows the energy cost of basic operations such as averaging or compressing sensor readings (example, temperature data) before sending them to the Base Station.
+
+
+2.3 Multi-Dimensional Performance Analysis
+
+The advantages of the Vanguard framework are not limited to just one measure. Although network lifetime (measured by First Node Death, FND) is the main focus, it is also important that the network remains fair and reliable during operation. Vanguard’s performance is compared with LEACH [1] and the theoretical upper bound (God-Line):
+
+Lifetime: More than a tenfold increase in network stability, with a 10.21×improvement in FND.
+
+Fairness: Energy use is evenly distributed across nodes through the adaptive load-balancing factor γ (gamma).
+
+Reliability: A high packet delivery rate is maintained using self-adjusting tree structures.
+
+Efficiency: Energy consumption per bit is reduced by avoiding costly long-distance transmissions.
+
+Overall, Vanguard-WSN brings real-world performance much closer to the theoretical maximum. These results show that understanding and using network structure across layers is essential for building long-lasting wireless sensor networks.
+
+	BACKGROUND AND RELATED WORK 
+
+Clustering in Wireless Sensor Networks (WSNs) was introduced to deal with the limited battery power of sensor nodes. In a flat network, every node sends its data directly to the Base Station (BS). Because transmission energy increases rapidly with distance either with the square of the distance d² or even the fourth power d⁴ nodes that are farther from the BS lose energy much faster than those closer to it. This uneven energy drain can quickly break the network into disconnected parts. Clustering organizes the network into smaller groups, each controlled by a Cluster Head (CH). The CH collects data from nearby nodes, combines it, and then forwards it to the BS. This reduces the total number of transmissions and allows most nodes to send data over short, energy-efficient distances. However, the success of this approach depends heavily on how well the CHs are chosen. Many traditional protocols select CHs randomly or probabilistically. While this keeps the design simple, it often leads to unstable behaviour and fails to prevent uneven energy use, commonly referred to as the Energy Hole Problem.
+
+
+3.1 Detailed Analysis of Legacy Protocols
+
+
+LEACH: The Probabilistic Pioneer
+
+Low-Energy Adaptive Clustering Hierarchy (LEACH), proposed by Heinzelman et al., [1], was the first major protocol to introduce the idea of rotating cluster heads in Wireless Sensor Networks. The main goal of LEACH is simple: instead of letting a few nodes drain their energy by acting as cluster heads all the time, the responsibility is shared among all nodes over multiple rounds.
+
+To achieve this, LEACH uses a probabilistic threshold function T(n) to decide which nodes become cluster heads in each round:
+
+               (5)
+
+Here, p represents the desired fraction of cluster heads (usually around 5%), r is the current round number, and G is the set of nodes that have not acted as cluster heads in the last 1/p rounds.
+
+Key Limitation:
+Although LEACH succeeds in rotating the cluster head role, it does so without considering the actual condition of the nodes. The selection process is completely random and does not account for residual energy. As a result, a node with very low remaining energy can be chosen as a cluster head just as easily as a fully charged node, as long as it has not recently held the role. In addition, LEACH assumes that every cluster head can directly communicate with the base station using a single-hop transmission. This assumption works only for small network areas. In larger deployments (greater than 100 meters), cluster heads located far from the base station consume excessive energy while transmitting data, causing them to die quickly. This leads to what is commonly referred to as an edge collapse, where nodes near the network boundary fail much earlier than others.
+
+HEED: Iterative Energy Awareness
+
+The Hybrid Energy-Efficient Distributed (HEED) clustering protocol [2] was proposed as a direct response to one of LEACH’s biggest weaknesses: its inability to consider how much energy a node has left. Instead of treating all nodes equally, HEED attempts to make smarter choices by giving preference to nodes with higher remaining energy when selecting cluster heads.
+
+HEED follows a two-stage process.
+
+In the initialization stage, each node computes its likelihood of becoming a cluster head using
+
+              (6)
+
+
+This simple adjustment ensures that nodes with more available energy are more likely to take on the demanding role of a cluster head. Next comes the iterative selection stage. Nodes repeatedly exchange tentative cluster-head messages with their neighbours. If a node detects a nearby cluster head that offers a lower communication cost or better energy profile, it joins that cluster. Otherwise, it increases its own probability of becoming a cluster head and tries again. This process continues until every node settles into a cluster.
+
+Where HEED Falls Short:
+
+Although HEED makes better-informed cluster-head decisions than LEACH, it introduces a new problem: excessive overhead. The repeated message exchanges required during the selection phase generate many control packets before any useful data is even transmitted. For energy-limited sensor networks, this organizational cost is far from trivial, it drains batteries simply to establish the network structure. By contrast, Vanguard-WSN avoids this inefficiency entirely. Cluster-head selection is completed in a single, deterministic step, eliminating iterative negotiations and unnecessary control traffic. As a result, Vanguard-WSN preserves energy for actual sensing and data transmission, rather than wasting it on network setup.
+
+PEGASIS: The Chain-Based Extremity
+
+Power-Efficient Gathering in Sensor Information Systems (PEGASIS) [8] takes a chain-based approach instead of clustering. Each node communicates only with its nearest neighbour, aggregates data, and forwards it along the chain until a designated leader transmits the final packet to the Base Station. While this minimizes per-hop transmission energy, it introduces two major limitations. First, latency grows linearly with network size—data from one end of a 100-node chain must pass through 99 hops before reaching the sink. Second, the chain is fragile: the failure of a single node breaks the entire structure, forcing costly global reconstruction. Vanguard-WSN avoids these issues by using a tree-based topology, preserving short-hop energy efficiency while enabling parallel data flow, lower delay and greater resilience to node failures.
+
+B. Modern Approaches: AI and Swarm Intelligence
+
+Recent research has shifted toward centralized AI-based optimization methods, using techniques such as Genetic Algorithms (GA) [4], Particle Swarm Optimization (PSO) [5], and Reinforcement Learning (RL) [6] to select optimal CH sets.
+
+Swarm Intelligence: Protocols like PSO-C define a performance score for the overall network and gradually improve a group of possible solutions over time. While these methods are theoretically optimal, they require the Base Station to know the exact energy level of every node and to perform complex and time-consuming calculations in each round.
+
+Reinforcement Learning: Reinforcement Learning based routing agents learn through trial and error. However, these methods take long time to provide a good solution, and this training period can take longer than the battery life of the sensor nodes.
+
+The Vanguard Advantage: Vanguard-WSN avoids the difficulty of AI in favor of deterministic utility. By defining an algebraic utility function that aligns with 94% with the best LP-bound (God-Line), we achieve AI-level performance with simple arithmetic operation.
+
+	Table 1 : Qualitative Comparison and Taxonomy
+
+Vanguard-WSN combines the best ideas from earlier routing techniques. It is simple, saves energy, and forwards data efficiently, while reducing the weaknesses seen in previous approaches through the EBPT design.
+
+	METHODOLOGY: UTILITY-DRIVEN PATH SELECTION
+
+4.1  Introduction to Deterministic Utility
+
+The proposed Methodology framework of Vanguard-WSN is the shift from random role rotation to a utility based deterministic approach. Instead of choosing leaders randomly, the system selects based on clear and measurable information. The system selects Cluster Heads (CH) and decides routes based on the actual condition of each node, such as how much energy it has left, how well it is connected in the network, and how much traffic it is handling. This section explains how the Utility Index is mathematically derived and how the Energy-Balanced Path Tree (EBPT) is constructed.
+
+4.2. The Utility Index Formulation
+
+To measure how suitable a node  is to act as a main relay node, a combined score called  is defined. This score brings together different physical factors into one single value, which the SDN controller then uses to make decisions.
+
+Utility Function:
+
+                  (6)
+
+Where:
+ Current residual energy of the node i
+itial energy capacity of the node i (typically 0.5 J)
+deg(i): Node degree - number of neighboring nodes within transmission range R
+α, β: Weighting coefficients such that α + β = 1
+
+Component Intuition
+
+Energy Weight (α): Remaining energy of basic sensing tasks are saved as in the later stages of the network's lifetime, cluster heads (CH) with low battery are made sure to be not selected by increasing the value of α.
+
+Density Weight (β): This term reduces the chances of selecting nodes from high-density areas. Standard heuristics often select CHs in dense regions to maximize connectivity. However, this leads to quick energy loss of those regions (Hotspots). By giving lower priority to high degrees, Vanguard encourages the selection of CHs in sparser regions, spreading the load to the edges of the network.
+
+Algorithm 1: Utility-Based CH Selection
+
+Input: set of nodes N, threshold tau
+
+Output: set of Cluster Heads CH_set
+
+
+
+FOR each node i in N:
+
+Receive heartbeat(ID_i, E_res_i, Location_i)
+
+Calculate Degree deg(i) based on neighbor table
+
+Compute U_i = alpha * (E_res_i / E_max) + beta * (1 / (1 + deg(i)))
+
+END FOR
+
+Calculate dynamic threshold tau = Mean(U)
+
+CH_set = {}
+
+FOR each node i in N:
+
+IF U_i > tau AND TimeSinceLastCH(i) > Gamma_Holdoff:
+
+CH_set.add(i)
+
+Broadcast CH_Advertisement(i)
+
+ELSE:
+
+Node i enters 'Member' state
+
+END IF
+
+RETURN CH_set
+
+
+
+Measurement of the "TimeSinceLastCH" timer ensures that even high-value nodes are given a rest period, preventing thermal runaway or battery fatigue.
+
+
+
+D. Energy-Balanced Path Tree (EBPT) Construction
+
+Once CHs are selected, the network must form a multi-hop path to send data to the sink. The EBPT is a Directed Acyclic Graph (DAG) rooted at the Base Station.
+
+Submodular Optimization Logic
+
+
+
+The construction of the EBPT can be viewed as a greedy approximation of a submodular optimization problem. We try to maximize the "Network Lifetime" function.
+
+1.  Distance Sorting: Nodes are arranged based on their Euclidean distance from the Base Station. This ensures that the tree is built starting from the Base Station and expanding outward, which prevents the loop formation.
+
+2. Parent Selection: For each node ‘u’ a set of possible parent nodes  are examined which are nodes located closer to the Base Station.The best parent ‘v’ is selected to maximize:
+
+Edge Weight Function
+
+
+
+                (7)
+
+
+
+Where  is the Recursive sum of all children currently attached to node 
+
+
+
+Figure 3: Lifetime Fairness Pareto Frontier
+
+
+
+Adaptive γ Factor
+
+
+
+The  (Gamma) factor is the "tuning knob" of the Vanguard framework.
+
+-   Low  :The network behaves like a shortest-path tree, prioritizing energy efficiency (minimized hops).
+
+-   High  :The network gives less priority to heavy nodes, making data travel through longer routes to prevent energy hotspots.
+This Adaptive Gamma Tuner monitors the variance of energy across the network. As ​ ​ increases (indicating energy imbalance),  is automatically incremented. This forces the tree to "widen," using edge nodes and naturally healing energy holes.
+
+E. Complexity Analysis
+
+1) Time Complexity
+
+Calculating  for all nodes is a linear operation,  For CH selection and sorting nodes by distance requires  ). Each node checks k neighbours. In the worst case  which leads to . However, with a fixed transmission radius, k is constant or small, making this The dominant term is the sort, making the overall complexity  ). This is more efficient than iterative approaches like HEED  or Swarm Intelligence based approaches 
+
+2) Message Complexity
+
+Vanguard use an important mechanism where each node sends 1 packet to the BS per round. The BS replies with a single broadcast schedule. Thus, message complexity is  the theoretical minimum for any centralized protocol.
+
+F. Theoretical Convergence
+
+The EBPT structure is guaranteed to create a connected graph if the nodes are placed densely enough to meet the minimum connectivity requirement. Since the parent selection metric  is strictly positive and the distance sorting prevents back propagation, the algorithm is loop-free and builds a proper tree structure in a fixed number of steps. This determinism is crucial for hard real-time monitoring applications.
+
+V. SIMULATION AND NUMERICAL ANALYSIS
+
+A. Experimental Setup
+
+
+
+To carefully test the proposed framework, we ran several simulations to compare Vanguard-WSN against LEACH [5], HEED [7], and PEGASIS [8] baselines. The simulation setup was created using a custom discrete-event simulator written in Python, following the First-Order Radio Model parameters commonly used in wireless sensor network research.
+
+
+
+Figure 4: Initial Network Deployment
+
+Simulation Parameters
+
+	TABLE 2:SIMULATION SETTINGS AND PARAMETERS
+
+
+B. Network Stability Analysis (FND)
+
+
+
+[Figure 5: Network Stability (FND]
+
+
+
+The above figure compares the network lifetime by the number of alive nodes of different protocol. The First Node Death (FND) is used to measure when the first node runs out of energy during the simulation for a 50-node network. LEACH experiences its FND at approximately Round 97, roughly 5% of rounds. The early failure is due to probabilistic selection of Cluster Heads, where nodes with low residual energy may still be assigned energy-intensive communication roles. HEED performs marginally better (FND ~210). However, the performance is limited by additional control overhead and repeated cluster formation procedures. In contrast, the proposed Vanguard-WSN protocol maintains all nodes alive until Round 993.1. The proposed method significantly delays the first node death compared to LEACH and HEED. By dynamically adjusting the relay burden away from weakest nodes, the proposed method distributes the energy consumption more uniformly across the network. Hence, no single node fails and network remains fully functional for a significantly longer duration compared to other protocols.
+
+
+C. Comparative Death Curves
+
+The First Node Death (FND) and Last Node Death (LND) metrics were evaluated across multiple routing protocols to assess network stability and energy distribution. LEACH exhibits an early FND, indicating rapid energy depletion in critical nodes. While energy-aware and traffic-aware variants improve stability to some extent, the proposed Vanguard-WSN protocol substantially extends both FND and LND, demonstrating more uniform energy utilization and prolonged network lifetime. Furthermore, the reduced gap between FND and LND suggests improved load balancing  and more consistent energy consumption across the network.
+
+
+
+[Figure 6: Comparative Death Curves]
+
+D. Epoch-by-Epoch Network Behaviour
+To examine the operational behaviour of the proposed Vanguard-WSN protocol, the evolution of the network is analysed across three representative time intervals based on the observed changes in routing and energy distribution.
+
+Early Phase (Round 0–300): The network follows shortest path algorithm for operation. The adaptive γ factor remains low because energy variance is minimal. Under this condition, routing decisions primarily favour paths with shorter geometric distance to the sink, resulting in near–shortest-path forwarding behaviour.
+
+Mid life Phase (Round 300–800): Energy variance increases as nodes near sink frequently forward the packets. In response, the adaptive GAMMA Tuner increases the value of γ and this alters the behaviour of the energy balanced path selection mechanism, causing a portion of the traffic to be redirected through nodes located farther from the sink.
+
+Terminal Phase (Round 800–1000): In the final stage of the network, most nodes have very low remaining energy. The utility-based selection function  is used to frequently rotate forwarding and leadership roles among the nodes with comparatively higher residual energy. This avoids excessive workload on any individual node and enables the network to remain functional.
+
+E. Benchmarking Against the Theoretical Bound
+The performance of Vanguard-WSN was evaluated against a theoretical upper bound on network lifetime, referred as the God-Line. Our empirical FND shows a correlation coefficient of R² = 0.94 with the LP-solved bound, operating at 92% efficiency. These results show that, despite relying only on local information, Vanguard-WSN achieves performance close to the centralized LP solution in the evaluated simulation setting.
+
+F. Energy Fairness and Redistribution
+To examine how evenly energy is consumed across the network, Jain’s Fairness Index (J) is used to measure the symmetry of residual energy among nodes.
+
+
+
+Figure 7: Jain's Fairness Index
+
+Fairness–Lifetime Trade-off
+
+In conventional routing protocols, a low fairness index generally indicates unbalanced energy usage. However, in the proposed Vanguard-WSN protocol, a certain degree of imbalance is inherent to the multi-hop routing structure. Nodes located closer to the base station forward more data, so they lose energy faster than nodes at the edges of the network.The EBPT-based routing strategy intentionally allows these relay nodes to carry a higher forwarding load inorder to protect distant and low-energy nodes from early exhaustion. As a result, energy consumption is redistributed in a structured manner rather than uniformly across all nodes.
+
+G. Data Throughput and Reliability
+
+
+
+                 Figure 8: Throughput Analysis                                                        Figure 9: State Snapshot (FND Epoch
+
+
+
+Figure 10: Energy Dissipation Heatmap
+
+Comparative Metrics Summary
+
+	TABLE 3:   COMPARATIVE PERFORMANCE METRICS
+
+J. Study Limitations
+
+Ideal MAC layer: The simulations assume a collision-free TDMA-based MAC layer, which is commonly adopted for routing protocol evaluation. However, communication delay and underestimate effects in high-interference environments is ignored.
+
+Static sink :A fixed sink is considered in this study. The use of mobile sinks is not explored which may further improve energy balancing.
+
+Radio energy model :The simulation uses a basic first-order radio energy model, and it does not consider effects such as fading or signal reflections.
+
+	CONCLUSION
+
+This This paper introduced Vanguard-WSN, a routing framework developed to address the long-standing Energy Hole Problem in Wireless Sensor Networks (WSNs). Unlike conventional protocols that depends on random selection or local optimization, Vanguard-WSN uses a deterministic, utility-based approach to manage the network.The key innovation introduced in this study is the Energy-Balanced Path Tree (EBPT), which separates sensing from data forwarding to use energy more efficiently. By assigning multi-hop communication tasks only to nodes that are most capable based on energy and network conditions the framework ensures more balanced energy consumption across the network. Simulation results demonstrate a 10.21× improvement in network stability, measured using First Node Death (FND), compared to the widely adopted LEACH protocol [5].Moreover, the strong correlation (94%) with the theoretical upper-bound lifetime (God-Line benchmark) indicates that distributed methods can achieve results close to the global optimality without depending on computationally intensive linear programming technique. The algorithm maintains practical computational complexity, making it suitable for deployment on resource-constrained hardware. Overall, the findings suggest that Vanguard-WSN provides a robust and sustainable routing solution for mission-critical WSN applications where network lifetime and reliability are essential.
+
+REFERENCES
+
+	[1] Heinzelman, W. R., Chandrakasan, A., & Balakrishnan, H. (2000, January). Energy-efficient communication protocol for wireless microsensor networks. In Proceedings of the 33rd annual Hawaii international conference on system sciences (pp. 10-pp). IEEE.
+
+	[2] Younis, O., & Fahmy, S. (2004). HEED: a hybrid, energy-efficient, distributed clustering approach for ad hoc sensor networks. IEEE Transactions on mobile computing, 3(4), 366-379.
+
+	[3] Lindsey, S., & Raghavendra, C. S. (2002, March). PEGASIS: Power-efficient gathering in sensor information systems. In Proceedings, IEEE aerospace conference (Vol. 3, pp. 3-3). IEEE.
+
+	[4] Hussain, S., & Islam, O. (2007, March). An energy efficient spanning tree based multi-hop routing in wireless sensor networks. In 2007 IEEE Wireless Communications and Networking Conference (pp. 4383-4388). IEEE.
+
+	[5] Latiff, N. A., Tsimenidis, C. C., & Sharif, B. S. (2007, September). Energy-aware clustering for wireless sensor networks using particle swarm optimization. In 2007 IEEE 18th international symposium on personal, indoor and mobile radio communications (pp. 1-5). IEEE.
+
+	[6] Arroyo-Valles, R., Alaiz-Rodriguez, R., Guerrero-Curieses, A., & Cid-Sueiro, J. (2007, December). Q-probabilistic routing in wireless sensor networks. In 2007 3rd international conference on intelligent sensors, sensor networks and information (pp. 1-6). IEEE.
+
+	[7] Heinzelman, W. B., Chandrakasan, A. P., & Balakrishnan, H. (2002). An application-specific protocol architecture for wireless microsensor networks. IEEE Transactions on wireless communications, 1(4), 660-670.
+
+	[8] Manjeshwar, A., & Agrawal, D. P. (2001, April). TEEN: ARouting Protocol for Enhanced Efficiency in Wireless Sensor Networks. In ipdps (Vol. 1, No. 2001, p. 189).
+
+	[9] Akyildiz, I. F., Su, W., Sankarasubramaniam, Y., & Cayirci, E. (2002). Wireless sensor networks: a survey. Computer networks, 38(4), 393-422.
+
+	[10] Al-Karaki, J. N., & Kamal, A. E. (2004). Routing techniques in wireless sensor networks: a survey. IEEE wireless communications, 11(6), 6-28.
+
+	[11] Abbasi, A. A., & Younis, M. (2007). A survey on clustering algorithms for wireless sensor networks. Computer communications, 30(14-15), 2826-2841.
+
+	[12] Jain, R. K., Chiu, D. M. W., & Hawe, W. R. (1984). A quantitative measure of fairness and discrimination. Eastern Research Laboratory, Digital Equipment Corporation, Hudson, MA, 21(1), 2022-2023.
+
+	[13] Kumar, D., Aseri, T. C., & Patel, R. (2009). EEHC: Energy efficient heterogeneous clustered scheme for wireless sensor networks. computer communications, 32(4), 662-667.
+
+	[14] Singh, S. K., Kumar, P., & Singh, J. P. (2017). A survey on successors of LEACH protocol. Ieee Access, 5, 4298-4328.
+
+	[15] Behera, T. M., Mohapatra, S. K., Samal, U. C., Khan, M. S., Daneshmand, M., & Gandomi, A. H. (2019). Residual energy-based cluster-head selection in WSNs for IoT application. IEEE Internet of Things Journal, 6(3), 5132-5139.
+
+	[16] Hasan, M. Z., Al-Rizzo, H., & Al-Turjman, F. (2017). A survey on multipath routing protocols for QoS assurances in real-time wireless multimedia sensor networks. IEEE Communications Surveys & Tutorials, 19(3), 1424-1456.
+
+	[17] Rao, P. S., Jana, P. K., & Banka, H. (2017). A particle swarm optimization based energy efficient cluster head selection algorithm for wireless sensor networks. Wireless networks, 23(7), 2005-2020.
+
+	[18] Darabkh, K. A., Al-Maaitah, N. J., Jafar, I. F., & Khalifeh, A. F. (2018). EA-CRP: a novel energy-aware clustering and routing protocol in wireless sensor networks. Computers & Electrical Engineering, 72, 702-718.
+
+	[19] Sara, G. S., & Sridharan, D. (2014). Routing in mobile wireless sensor network: A survey. Telecommunication Systems, 57(1), 51-79.

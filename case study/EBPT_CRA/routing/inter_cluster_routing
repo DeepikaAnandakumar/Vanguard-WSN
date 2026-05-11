@@ -1,0 +1,53 @@
+import heapq
+from routing.inter_cluster_weight import inter_cluster_weight
+
+
+
+def route_ch_to_bs(cluster_heads, forwarders, bs):
+    """
+    Find paths from each CH to BS using forwarding nodes
+    """
+    paths = {}
+
+    nodes = cluster_heads + forwarders + [bs]
+
+    for ch in cluster_heads:
+        path = dijkstra(ch, bs, nodes)
+        paths[ch.id] = path
+
+    return paths
+
+
+def dijkstra(source, target, nodes):
+    pq = []
+    heapq.heappush(pq, (0, source))
+    dist = {n: float("inf") for n in nodes}
+    prev = {}
+    dist[source] = 0
+
+    while pq:
+        cost, current = heapq.heappop(pq)
+
+        if current == target:
+            break
+
+        for neighbor in nodes:
+            if neighbor == current:
+                continue
+
+            w = inter_cluster_weight(current, neighbor, target)
+            new_cost = cost + w
+
+            if new_cost < dist[neighbor]:
+                dist[neighbor] = new_cost
+                prev[neighbor] = current
+                heapq.heappush(pq, (new_cost, neighbor))
+
+    # reconstruct path
+    path = []
+    node = target
+    while node in prev:
+        path.append(node)
+        node = prev[node]
+    path.append(source)
+    return list(reversed(path))

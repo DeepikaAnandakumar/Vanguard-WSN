@@ -1,0 +1,29 @@
+﻿SUCCESS: Opened Vanguard_WSN_Final to show.pptx
+SLIDE_COUNT: 17
+--- SLIDE 1 ---
+  TEXT: VANGUARD-WSN
+  TEXT: 10.21Î Lifetime Extension via Utility-Driven Routing
+  TEXT: A Breakthrough in Sustainable IoT Infrastructure
+  TEXT: Deepika A  À  Aishvarya G  À  Gayatri K  À  Anjana A
+  TEXT: Department of Mathematics  À  Amrita Vishwa Vidyapeetham
+  TEXT: VANGUARD-WSN  À  Amrita Vishwa Vidyapeetham  À  Dept. of Mathematics
+--- SLIDE 2 ---
+  TEXT: PROBLEM & OBJECTIVES
+  TEXT: VANGUARD-WSN  À  Amrita Vishwa Vidyapeetham  À  Dept. of Mathematics
+  TEXT: The Energy Hole Problem
+  TEXT: Why existing wireless sensor networks fail prematurely
+  TEXT: Energy Hole Phenomenon
+  TEXT: Relay nodes near the base station carry all traffic and die first ù even if distant nodes have 80% battery remaining.
+  TEXT: Legacy Protocol Failure
+  TEXT: LEACH picks cluster heads by random dice roll ù often selecting exhausted nodes, causing abrupt network collapse.
+  TEXT: Our Objective
+  TEXT: Replace chance with deterministic logic. Maximize stability (FND) and throughput. Approach the theoretical God-Line LP Bound.
+--- SLIDE 3 ---
+  TEXT: PROBLEM & OBJECTIVES
+  TEXT: VANGUARD-WSN  À  Amrita Vishwa Vidyapeetham  À  Dept. of Mathematics
+  TEXT: Literature Survey: Comparative Gaps
+--- SLIDE 4 ---
+  TEXT: SYSTEM ARCHITECTURE
+  TEXT: VANGUARD-WSN  À  Amrita Vishwa Vidyapeetham  À  Dept. of Mathematics
+  TEXT: System Operation Flow
+ERROR during inspection: 'charmap' codec can't encode character '\u2192' in position 27: character maps to <undefined>

@@ -1,0 +1,6 @@
+﻿| Algorithm | FND (Mean) | FND (Std) | LND (Mean) | LND (Std) |
+|---|---|---|---|---|
+| Vanguard | 165.0 | 107.4 | 1999.0 | 0.0 |
+| LEACH-MultiHop | 107.0 | 36.9 | 1999.0 | 0.0 |
+| HEED-MultiHop | 182.6 | 83.7 | 1999.0 | 0.0 |
+| PEGASIS | 1745.8 | 243.5 | 1999.0 | 0.0 |

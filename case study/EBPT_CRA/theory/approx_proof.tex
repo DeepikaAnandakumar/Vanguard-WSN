@@ -1,0 +1,27 @@
+% Approximation proof sketch for EBPT greedy CH selection
+\section*{Appendix: Approximation Sketch for Greedy CH Selection}
+
+\textbf{Theorem (Informal).} Under the simplifying modeling assumptions described below, the greedy energy-aware cluster-head selection procedure used in EBPT can be related to a submodular maximization problem and therefore admits a $(1 - 1/e)$-style approximation guarantee for the lifetime objective.
+
+\textbf{Assumptions (to be made explicit):}
+\begin{enumerate}
+  \item Lifetime (FND) can be expressed as a monotone, submodular set function of the chosen set of cluster-heads (or of selected per-round decisions) under the \'single-aggregation-per-round\' abstraction.
+  \item Energies and per-round costs are nonnegative and the aggregation/compression model induces diminishing returns on adding additional CHs.
+  \item The routing/forwarding overhead introduced by CH choices is bounded and can be upper-bounded by a linearized cost term.
+  \item The algorithm runs a greedy selection that, at each step, picks a CH (or local choice) that maximizes the marginal increase in the lifetime surrogate.
+\end{enumerate}
+
+\textbf{Proof sketch.}
+\begin{enumerate}
+  \item Formulate an appropriate set function $F(S)$ that maps a candidate set of CH assignments (or a sequence of local decisions) to an estimated network lifetime (FND) under the simplified model.
+  \item Show monotonicity: adding CH choices cannot decrease the surrogate lifetime under assumptions of nonnegative energy and nonnegative aggregation benefit.
+  \item Show submodularity (diminishing returns): the incremental lifetime gain from adding a CH to a larger set is at most the gain from adding it to a smaller set, under the diminishing-load and bounded-overhead assumptions.
+  \item Apply the classical result for submodular maximization: the greedy algorithm that iteratively selects the element with largest marginal gain achieves $F(\text{greedy}) \ge (1 - 1/e) F(\text{opt})$ when maximizing a monotone submodular function under a cardinality constraint.
+  \item Map the greedy EBPT CH-selection decisions to the abstract greedy choices above (discuss differences due to dynamic per-round decisions and comment on approximation gaps introduced by approximation of per-round dynamics).
+\end{enumerate}
+
+\textbf{Discussion and next steps:}
+\begin{itemize}
+  \item The above is a proof \emph{sketch} that requires converting the lifetime objective precisely into a set function and verifying the submodularity property under stated assumptions; this is nontrivial and is listed as ongoing work.
+  \item The final formal proof will (a) state explicit assumptions, (b) define $F(S)$ formally (including how per-round costs are aggregated), and (c) show the required monotonicity and submodularity lemmas with full detail.
+\end{itemize}
