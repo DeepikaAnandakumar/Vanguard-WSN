@@ -16,6 +16,7 @@ This repository contains the complete implementation of the Vanguard-WSN framewo
 - **Deepika Anandakumar** (Lead Developer) - [DeepikaAnandakumar](https://github.com/DeepikaAnandakumar)
 - **Aishvarya Govindaraju** (Collaborator) - [AishvairyaGovindaraju](https://github.com/AishvairyaGovindaraju)
 - **Gayatri Kanagaraj** (Collaborator) - [GayaktriKanagaraj](https://github.com/GayaktriKanagaraj)
+- **Anjana A** (Collaborator)
 
 ## Table of Contents
 - [Installation](#installation)
@@ -88,9 +89,11 @@ Vanguard-WSN/
 │   │   ├── theory/            # LP-bounds and proofs
 │   │   ├── scripts/           # Experiment runners
 │   │   └── simulation/        # Simulation utilities
-│   ├── _supplementary_/       # Additional docs and results
-│   ├── _final_submission_/    # Final results and figures
-│   ├── create_ieee_*.py       # Paper generation scripts
+│   ├── _supplementary_/       # Results and analysis
+│   │   ├── top_tier_results/  # Simulation results (50/100 nodes)
+│   │   └── num_results_final/ # Numerical results
+│   ├── num_results/           # Raw simulation outputs
+│   ├── ch_strategy_comparison/# Comparison results
 │   └── README_reproduce.md    # Reproducibility guide
 ├── requirements.txt           # Python dependencies
 └── README.md                  # This file
